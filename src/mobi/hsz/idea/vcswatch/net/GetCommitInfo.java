@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GitWatchRequest implements Runnable {
+public class GetCommitInfo implements Runnable {
 
     private final VirtualFile workingDirectory;
     private final GitWatchService gitWatchService;
     private static final String TEMPLATE = "%h %an ## %ad ## %s";
     private static final Pattern PATTERN = Pattern.compile("^(\\w+) (.*?) ## (\\d+) .*? ## (.*)$", Pattern.MULTILINE);
 
-    public GitWatchRequest(@NotNull AbstractVcs vcs, @NotNull VirtualFile workingDirectory) {
+    public GetCommitInfo(@NotNull AbstractVcs vcs, @NotNull VirtualFile workingDirectory) {
         this.workingDirectory = workingDirectory;
         this.gitWatchService = GitWatchService.getInstance(vcs.getProject());
     }
