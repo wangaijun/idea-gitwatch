@@ -1,9 +1,9 @@
 package mobi.hsz.idea.vcswatch.model;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Date;
 
+/**值类型*/
 public class Commit {
 
     private final String id;
