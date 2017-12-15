@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 /**单例*/
 public class GitWatchService {
-    public static long DELAY = 600;
+    public static long DELAY = 60;
     private final ProjectLevelVcsManager vcsManager;
     private final ScheduledExecutorService scheduler;
     private final List<ScheduledFuture<?>> scheduledFutureList = ContainerUtil.newArrayList();
@@ -74,6 +74,6 @@ public class GitWatchService {
     }
 
     public interface OnCommitListener {
-        public void onCommit(@NotNull Commit commit);
+        void onCommit(@NotNull Commit commit);
     }
 }
