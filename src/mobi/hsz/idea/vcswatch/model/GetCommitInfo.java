@@ -1,19 +1,14 @@
-package mobi.hsz.idea.vcswatch.net;
+package mobi.hsz.idea.vcswatch.model;
 
-import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
-import com.intellij.execution.util.ExecUtil;
 import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.ContainerUtil;
-import git4idea.config.GitVcsApplicationSettings;
 import mobi.hsz.idea.vcswatch.model.Commit;
 import mobi.hsz.idea.vcswatch.model.GitWatchService;
+import mobi.hsz.idea.vcswatch.net.NetAccesser;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Date;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,11 +26,11 @@ public class GetCommitInfo implements Runnable {
 
     @Override
     public void run() {
-        if (exec("remote", "update") == null) {
+        if (NetAccesser.exec(workingDirectory.getPath(), "remote", "update") == null) {
             return;
         }
 
-        ProcessOutput output = exec("log", "..@{u}", "--date=raw", "--pretty=format:" + TEMPLATE);
+        ProcessOutput output = NetAccesser.exec(workingDirectory.getPath(),"log", "..@{u}", "--date=raw", "--pretty=format:" + TEMPLATE);
         if (output == null) {
             return;
         }
@@ -51,27 +46,8 @@ public class GetCommitInfo implements Runnable {
         }
     }
 
-    @Nullable
-    private ProcessOutput exec(@NotNull String... command) {
-        try {
-            final List<String> commands = ContainerUtil.newArrayList(getExecutable());
-            ContainerUtil.addAll(commands, command);
-            final ProcessOutput output = ExecUtil.execAndGetOutput(commands, workingDirectory.getPath());
-            if (output.getExitCode() > 0 || output.getStdoutLines().size() == 0) {
-                return null;
-            }
-            return output;
-        } catch (ExecutionException ignored) {
-            return null;
-        }
-    }
-
     private void addCommit(@NotNull Commit commit) {
         this.gitWatchService.add(commit);
     }
 
-    @NotNull
-    private String getExecutable() {
-        return GitVcsApplicationSettings.getInstance().getPathToGit();
-    }
 }

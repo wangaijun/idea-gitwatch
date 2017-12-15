@@ -6,7 +6,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.VcsRoot;
 import com.intellij.util.containers.ContainerUtil;
-import mobi.hsz.idea.vcswatch.net.GetCommitInfo;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
