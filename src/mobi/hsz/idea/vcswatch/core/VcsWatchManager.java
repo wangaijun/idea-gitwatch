@@ -1,7 +1,11 @@
 package mobi.hsz.idea.vcswatch.core;
 
 import com.intellij.concurrency.JobScheduler;
+import com.intellij.ide.plugins.IdeaPluginDescriptor;
+import com.intellij.ide.plugins.IdeaPluginDescriptorImpl;
+import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vcs.ProjectLevelVcsManager;
@@ -10,7 +14,6 @@ import com.intellij.util.containers.ContainerUtil;
 import git4idea.GitVcs;
 import mobi.hsz.idea.vcswatch.model.Commit;
 import mobi.hsz.idea.vcswatch.model.GitWatchRequest;
-import mobi.hsz.idea.vcswatch.util.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -76,7 +79,8 @@ public class VcsWatchManager {
             return null;
         }
 
-        if (Utils.isPluginEnabled("Git4Idea") && vcs instanceof GitVcs) {
+        IdeaPluginDescriptor p = PluginManager.getPlugin(PluginId.getId("Git4Idea"));
+        if (p instanceof IdeaPluginDescriptorImpl && p.isEnabled() && vcs instanceof GitVcs) {
             return new GitWatchRequest(vcs, root.getPath());
         }
 
