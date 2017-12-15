@@ -160,11 +160,13 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
             List<String> messages = ContainerUtil.newArrayList();
             for (Commit commit : commits) {
                 String time = new PrettyTime(Locale.ENGLISH).format(commit.getDate());
-
-                messages.add(CommonBundle.message(ResourceBundle.getBundle("messages.VcsWatchBundle"), "notification.content", commit.getMessage(), commit.getId(), time, commit.getUser()));
+                String template = "<br/>" +
+                        "  <b>%s</b><br/>" +
+                        "  <small><a href=\"HASH:%s\">{1}</a> - <i>%s</i> by <b>%s</b></small>";
+                messages.add(String.format(template,commit.getMessage(), commit.getId(), commit.getId(), time, commit.getUser()));
             }
-
-            return CommonBundle.message(ResourceBundle.getBundle("messages.VcsWatchBundle"), "notification.update", StringUtil.join(messages, "<br/>"));
+            String str = "<a href=\"UPDATE\">Update Project</a><br/>{0}";
+            return str + StringUtil.join(messages, "<br/>");
         }
 
         private static NotificationListener.Adapter createListener(@NotNull final Project project) {
