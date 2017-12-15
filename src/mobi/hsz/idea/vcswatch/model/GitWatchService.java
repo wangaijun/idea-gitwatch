@@ -3,9 +3,11 @@ package mobi.hsz.idea.vcswatch.model;
 import com.intellij.concurrency.JobScheduler;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.VcsRoot;
 import com.intellij.util.containers.ContainerUtil;
+import git4idea.GitVcs;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -38,7 +40,9 @@ public class GitWatchService {
 
         VcsRoot[] roots = vcsManager.getAllVcsRoots();
         for (VcsRoot root : roots) {
-            GetCommitInfoOper request = new GetCommitInfoOper(root.getVcs(), root.getPath());
+            AbstractVcs vcs = root.getVcs();
+            if (!(vcs instanceof GitVcs)) continue;
+            GetCommitInfoOper request = new GetCommitInfoOper(vcs, root.getPath());
             if (request != null) {
                 scheduledFutureList.add(scheduler.scheduleWithFixedDelay(request, 0, DELAY, TimeUnit.SECONDS));
             }
