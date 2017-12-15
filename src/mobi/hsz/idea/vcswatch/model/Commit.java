@@ -4,10 +4,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
-/**
- * @author Jakub Chrzanowski <jakub@hsz.mobi>
- * @since 0.1
- */
 public class Commit {
 
     private final String id;
