@@ -14,43 +14,13 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-
-/**
- * Manager that checks for the changes in the registered VCS repositories.
- *
- * @author Jakub Chrzanowski <jakub@hsz.mobi>
- * @since 0.1
- */
+/**单例*/
 public class GitWatchService {
-
-    /**
-     * TODO: don't use static delay
-     */
     public static long DELAY = 600;
-
-    /**
-     * Project VCS manager.
-     */
     private final ProjectLevelVcsManager vcsManager;
-
-    /**
-     * An {@link java.util.concurrent.ExecutorService} that can schedule commands.
-     */
     private final ScheduledExecutorService scheduler;
-
-    /**
-     * List of the scheduled futures.
-     */
     private final List<ScheduledFuture<?>> scheduledFutureList = ContainerUtil.newArrayList();
-
-    /**
-     * {@link OnCommitListener} event listeners list.
-     */
     private final List<OnCommitListener> onCommitListeners = ContainerUtil.newArrayList();
-
-    /**
-     * Commits map.
-     */
     private final Map<String, Commit> commits = ContainerUtil.newHashMap();
 
 
@@ -63,9 +33,6 @@ public class GitWatchService {
         return ServiceManager.getService(project, GitWatchService.class);
     }
 
-    /**
-     * Fetches available project VCS roots and starts listening.
-     */
     public void init() {
         stop();
 
@@ -79,9 +46,6 @@ public class GitWatchService {
         }
     }
 
-    /**
-     * Cancels all elements from {#link #scheduledFutureList} and clears the list.
-     */
     public void stop() {
         for (ScheduledFuture<?> scheduledFuture : scheduledFutureList) {
             scheduledFuture.cancel(true);
@@ -89,11 +53,6 @@ public class GitWatchService {
         scheduledFutureList.clear();
     }
 
-    /**
-     * Adds new commit to the {@link #commits} stack if doesn't exist.
-     *
-     * @param commit to add
-     */
     public void add(@NotNull Commit commit) {
         if (!this.commits.containsKey(commit.getId())) {
             this.commits.put(commit.getId(), commit);
@@ -103,27 +62,15 @@ public class GitWatchService {
         }
     }
 
-    /**
-     * Adds new {@link OnCommitListener}.
-     *
-     * @param listener to add
-     */
     public void setOnCommitListener(@NotNull OnCommitListener listener) {
         this.onCommitListeners.add(listener);
     }
 
-    /**
-     * Removes {@link OnCommitListener}.
-     *
-     * @param listener to remove
-     */
     public void removeOnCommitListener(@NotNull OnCommitListener listener) {
         this.onCommitListeners.remove(listener);
     }
 
-    /** Listener that is fired when new {@link Commit} appears. */
     public interface OnCommitListener {
         public void onCommit(@NotNull Commit commit);
     }
-
 }
