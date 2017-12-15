@@ -33,13 +33,12 @@ public class GitWatchService {
         return ServiceManager.getService(project, GitWatchService.class);
     }
 
-    public void init() {
+    public void start() {
         stop();
 
         VcsRoot[] roots = vcsManager.getAllVcsRoots();
         for (VcsRoot root : roots) {
-
-            GetCommitInfo request = new GetCommitInfo(root.getVcs(), root.getPath());
+            GetCommitInfoOper request = new GetCommitInfoOper(root.getVcs(), root.getPath());
             if (request != null) {
                 scheduledFutureList.add(scheduler.scheduleWithFixedDelay(request, 0, DELAY, TimeUnit.SECONDS));
             }

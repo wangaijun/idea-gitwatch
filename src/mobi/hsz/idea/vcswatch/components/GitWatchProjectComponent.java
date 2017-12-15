@@ -28,7 +28,7 @@ public class GitWatchProjectComponent implements ProjectComponent {
     private final VcsListener vcsListener = new VcsListener() {
         @Override
         public void directoryMappingChanged() {
-            gitWatchService.init();
+            gitWatchService.start();
         }
     };
 

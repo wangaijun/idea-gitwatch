@@ -12,12 +12,12 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GetCommitInfo implements Runnable {
+public class GetCommitInfoOper implements Runnable {
 
     private final VirtualFile workingDirectory;
     private final GitWatchService gitWatchService;
 
-    public GetCommitInfo(@NotNull AbstractVcs vcs, @NotNull VirtualFile workingDirectory) {
+    public GetCommitInfoOper(@NotNull AbstractVcs vcs, @NotNull VirtualFile workingDirectory) {
         this.workingDirectory = workingDirectory;
         this.gitWatchService = GitWatchService.getInstance(vcs.getProject());
     }
