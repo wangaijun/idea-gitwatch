@@ -1,11 +1,11 @@
-package mobi.hsz.idea.vcswatch.components;
+package mobi.waj.idea.gitwatch.components;
 
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.VcsListener;
 import com.intellij.util.messages.MessageBusConnection;
-import mobi.hsz.idea.vcswatch.model.GitWatchService;
+import mobi.waj.idea.gitwatch.model.GitWatchService;
 import org.jetbrains.annotations.NotNull;
 
 public class GitWatchProjectComponent implements ProjectComponent {

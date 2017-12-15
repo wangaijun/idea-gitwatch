@@ -1,4 +1,4 @@
-package mobi.hsz.idea.vcswatch.model;
+package mobi.waj.idea.gitwatch.model;
 
 import org.jetbrains.annotations.NotNull;
 import java.util.Date;

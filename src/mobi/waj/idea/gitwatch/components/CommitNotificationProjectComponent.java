@@ -1,4 +1,4 @@
-package mobi.hsz.idea.vcswatch.components;
+package mobi.waj.idea.gitwatch.components;
 
 import com.intellij.concurrency.JobScheduler;
 import com.intellij.notification.Notification;
@@ -23,8 +23,8 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.vcs.log.impl.VcsLogContentProvider;
 import com.intellij.vcs.log.impl.VcsLogManager;
 import com.intellij.vcs.log.ui.VcsLogUiImpl;
-import mobi.hsz.idea.vcswatch.model.Commit;
-import mobi.hsz.idea.vcswatch.model.GitWatchService;
+import mobi.waj.idea.gitwatch.model.Commit;
+import mobi.waj.idea.gitwatch.model.GitWatchService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.ocpsoft.prettytime.PrettyTime;

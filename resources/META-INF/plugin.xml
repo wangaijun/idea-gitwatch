@@ -1,5 +1,5 @@
 <idea-plugin version="2">
-    <id>mobi.hsz.idea.vcswatch</id>
+    <id>mobi.hsz.idea.gitwatch</id>
     <name>GIT watch</name>
     <version>0.1</version>
     <vendor email="jakub@hsz.mobi" url="http://www.hsz.mobi">hsz</vendor>
@@ -50,7 +50,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <projectService
-                serviceImplementation="mobi.hsz.idea.vcswatch.model.GitWatchService"/>
+                serviceImplementation="mobi.waj.idea.gitwatch.model.GitWatchService"/>
     </extensions>
 
     <application-components>
@@ -59,10 +59,10 @@
 
     <project-components>
         <component>
-            <implementation-class>mobi.hsz.idea.vcswatch.components.GitWatchProjectComponent</implementation-class>
+            <implementation-class>mobi.waj.idea.gitwatch.components.GitWatchProjectComponent</implementation-class>
         </component>
         <component>
-            <implementation-class>mobi.hsz.idea.vcswatch.components.CommitNotificationProjectComponent
+            <implementation-class>mobi.waj.idea.gitwatch.components.CommitNotificationProjectComponent
             </implementation-class>
         </component>
     </project-components>

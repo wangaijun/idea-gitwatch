@@ -1,4 +1,4 @@
-package mobi.hsz.idea.vcswatch.model;
+package mobi.waj.idea.gitwatch.model;
 
 import com.intellij.concurrency.JobScheduler;
 import com.intellij.openapi.components.ServiceManager;

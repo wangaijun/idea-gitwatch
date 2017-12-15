@@ -1,4 +1,4 @@
-package mobi.hsz.idea.vcswatch.net;
+package mobi.waj.idea.gitwatch.net;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;

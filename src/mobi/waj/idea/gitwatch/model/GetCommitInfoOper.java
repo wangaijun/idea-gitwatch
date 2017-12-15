@@ -1,11 +1,11 @@
-package mobi.hsz.idea.vcswatch.model;
+package mobi.waj.idea.gitwatch.model;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vfs.VirtualFile;
-import mobi.hsz.idea.vcswatch.net.NetAccesser;
+import mobi.waj.idea.gitwatch.net.NetAccesser;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
