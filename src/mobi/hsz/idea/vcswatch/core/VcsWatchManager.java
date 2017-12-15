@@ -3,12 +3,15 @@ package mobi.hsz.idea.vcswatch.core;
 import com.intellij.concurrency.JobScheduler;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.VcsRoot;
 import com.intellij.util.containers.ContainerUtil;
+import git4idea.GitVcs;
 import mobi.hsz.idea.vcswatch.requests.GitWatchRequest;
-import mobi.hsz.idea.vcswatch.requests.VcsWatchRequestFactory;
+import mobi.hsz.idea.vcswatch.util.Utils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -65,6 +68,20 @@ public class VcsWatchManager {
         return ServiceManager.getService(project, VcsWatchManager.class);
     }
 
+    @Nullable
+    public static GitWatchRequest create(@NotNull VcsRoot root) {
+        AbstractVcs vcs = root.getVcs();
+        if (vcs == null || root.getPath() == null) {
+            return null;
+        }
+
+        if (Utils.isPluginEnabled("Git4Idea") && vcs instanceof GitVcs) {
+            return new GitWatchRequest(vcs, root.getPath());
+        }
+
+        return null;
+    }
+
     /**
      * Fetches available project VCS roots and starts listening.
      */
@@ -73,7 +90,7 @@ public class VcsWatchManager {
 
         VcsRoot[] roots = vcsManager.getAllVcsRoots();
         for (VcsRoot root : roots) {
-            GitWatchRequest request = VcsWatchRequestFactory.create(root);
+            GitWatchRequest request = create(root);
             if (request != null) {
 //                scheduledFutureList.add(scheduler.schedule(request, DELAY, TimeUnit.SECONDS));
                 scheduledFutureList.add(scheduler.scheduleWithFixedDelay(request, 0, DELAY, TimeUnit.SECONDS));
