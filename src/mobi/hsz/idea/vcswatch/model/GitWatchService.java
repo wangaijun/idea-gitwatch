@@ -1,19 +1,13 @@
 package mobi.hsz.idea.vcswatch.model;
 
 import com.intellij.concurrency.JobScheduler;
-import com.intellij.ide.plugins.IdeaPluginDescriptor;
-import com.intellij.ide.plugins.IdeaPluginDescriptorImpl;
-import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.VcsRoot;
 import com.intellij.util.containers.ContainerUtil;
-import git4idea.GitVcs;
+import mobi.hsz.idea.vcswatch.net.GitWatchRequest;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -70,21 +64,6 @@ public class GitWatchService {
         return ServiceManager.getService(project, GitWatchService.class);
     }
 
-    @Nullable
-    public static GitWatchRequest create(@NotNull VcsRoot root) {
-        AbstractVcs vcs = root.getVcs();
-        if (vcs == null || root.getPath() == null) {
-            return null;
-        }
-
-        IdeaPluginDescriptor p = PluginManager.getPlugin(PluginId.getId("Git4Idea"));
-        if (p instanceof IdeaPluginDescriptorImpl && p.isEnabled() && vcs instanceof GitVcs) {
-            return new GitWatchRequest(vcs, root.getPath());
-        }
-
-        return null;
-    }
-
     /**
      * Fetches available project VCS roots and starts listening.
      */
@@ -93,7 +72,8 @@ public class GitWatchService {
 
         VcsRoot[] roots = vcsManager.getAllVcsRoots();
         for (VcsRoot root : roots) {
-            GitWatchRequest request = create(root);
+
+            GitWatchRequest request = new GitWatchRequest(root.getVcs(), root.getPath());
             if (request != null) {
                 scheduledFutureList.add(scheduler.scheduleWithFixedDelay(request, 0, DELAY, TimeUnit.SECONDS));
             }
