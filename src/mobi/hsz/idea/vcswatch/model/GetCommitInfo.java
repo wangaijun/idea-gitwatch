@@ -16,8 +16,6 @@ public class GetCommitInfo implements Runnable {
 
     private final VirtualFile workingDirectory;
     private final GitWatchService gitWatchService;
-    private static final String TEMPLATE = "%h %an ## %ad ## %s";
-    private static final Pattern PATTERN = Pattern.compile("^(\\w+) (.*?) ## (\\d+) .*? ## (.*)$", Pattern.MULTILINE);
 
     public GetCommitInfo(@NotNull AbstractVcs vcs, @NotNull VirtualFile workingDirectory) {
         this.workingDirectory = workingDirectory;
@@ -28,9 +26,9 @@ public class GetCommitInfo implements Runnable {
     public void run() {
         try {
             NetAccesser.exec(workingDirectory.getPath(), "remote", "update");
-            ProcessOutput output = NetAccesser.exec(workingDirectory.getPath(),"log", "..@{u}", "--date=raw", "--pretty=format:" + TEMPLATE);
+            ProcessOutput output = NetAccesser.exec(workingDirectory.getPath(),"log", "..@{u}", "--date=raw", "--pretty=format:" + "%h %an ## %ad ## %s");
 
-            Matcher matcher = PATTERN.matcher(output.getStdout());
+            Matcher matcher = Pattern.compile("^(\\w+) (.*?) ## (\\d+) .*? ## (.*)$", Pattern.MULTILINE).matcher(output.getStdout());
             while (matcher.find()) {
                 String id = matcher.group(1);
                 String user = matcher.group(2);
