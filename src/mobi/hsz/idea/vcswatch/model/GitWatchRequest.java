@@ -1,4 +1,4 @@
-package mobi.hsz.idea.vcswatch.requests;
+package mobi.hsz.idea.vcswatch.model;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
