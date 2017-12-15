@@ -1,16 +1,13 @@
 <idea-plugin version="2">
-    <id>mobi.hsz.idea.gitwatch</id>
+    <id>mobi.waj.idea.gitwatch</id>
     <name>GIT watch</name>
     <version>0.1</version>
-    <vendor email="jakub@hsz.mobi" url="http://www.hsz.mobi">hsz</vendor>
+    <vendor email="huiwenjwc@gmail.com">waj</vendor>
 
     <description><![CDATA[
       <h1>GIT watch</h1>
       <br/>
-      <a href="https://github.com/hsz/idea-vcswatch">GitHub</a> |
-      <a href="https://github.com/hsz/idea-vcswatch/issues">Issues</a> | Donate (
-      <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SJAU4XWQ584QL">PayPal</a> or
-      <a href="https://blockchain.info/address/1BUbqKrUBmGGSnMybzGCsJyAWJbh4CcwE1">BTC</a> )
+      <a href="https://github.com/wangaijun/idea-gitwatch">GitHub</a> |
       <br/>
       <br/>
       <b>GIT watch</b> is a plugin that periodically checks for any changes in the current project's repositories.
@@ -35,17 +32,7 @@
       <br/>
     ]]></description>
 
-    <change-notes><![CDATA[
-        <a href="https://github.com/hsz/idea-vcswatch/tree/v0.1">v0.1</a> (2015-05-19)<br/><br/>
-        <ul>
-            <li>Support GIT repositories</li>
-            <li>Support SVN repositories</li>
-            <li>Support Mercurial repositories</li>
-        </ul>
-            ]]>
-    </change-notes>
-
-    <idea-version since-build="123.72"/>
+     <idea-version since-build="123.72"/>
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">

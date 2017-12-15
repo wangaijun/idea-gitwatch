@@ -94,7 +94,7 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
     @NotNull
     @Override
     public String getComponentName() {
-        return "VcsWatch.CommitNotification";
+        return "GitWatch.CommitNotification";
     }
 
     private static class CommitNotification extends Notification {

@@ -51,7 +51,7 @@ public class GitWatchProjectComponent implements ProjectComponent {
     @NotNull
     @Override
     public String getComponentName() {
-        return "VcsWatch.VcsWatch";
+        return "GitWatch.GitWatch";
     }
 
 }
