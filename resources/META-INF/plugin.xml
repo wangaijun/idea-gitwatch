@@ -1,11 +1,11 @@
 <idea-plugin version="2">
     <id>mobi.hsz.idea.vcswatch</id>
-    <name>VCS watch</name>
+    <name>GIT watch</name>
     <version>0.1</version>
     <vendor email="jakub@hsz.mobi" url="http://www.hsz.mobi">hsz</vendor>
 
     <description><![CDATA[
-      <h1>VCS watch</h1>
+      <h1>GIT watch</h1>
       <br/>
       <a href="https://github.com/hsz/idea-vcswatch">GitHub</a> |
       <a href="https://github.com/hsz/idea-vcswatch/issues">Issues</a> | Donate (
@@ -13,7 +13,7 @@
       <a href="https://blockchain.info/address/1BUbqKrUBmGGSnMybzGCsJyAWJbh4CcwE1">BTC</a> )
       <br/>
       <br/>
-      <b>VCS watch</b> is a plugin that periodically checks for any changes in the current project's repositories.
+      <b>GIT watch</b> is a plugin that periodically checks for any changes in the current project's repositories.
       <br/>
       <b>Features</b>
       <ul>
