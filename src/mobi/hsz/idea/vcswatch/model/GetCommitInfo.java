@@ -1,10 +1,10 @@
 package mobi.hsz.idea.vcswatch.model;
 
+import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vfs.VirtualFile;
-import mobi.hsz.idea.vcswatch.model.Commit;
-import mobi.hsz.idea.vcswatch.model.GitWatchService;
 import mobi.hsz.idea.vcswatch.net.NetAccesser;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,28 +26,22 @@ public class GetCommitInfo implements Runnable {
 
     @Override
     public void run() {
-        if (NetAccesser.exec(workingDirectory.getPath(), "remote", "update") == null) {
-            return;
+        try {
+            NetAccesser.exec(workingDirectory.getPath(), "remote", "update");
+            ProcessOutput output = NetAccesser.exec(workingDirectory.getPath(),"log", "..@{u}", "--date=raw", "--pretty=format:" + TEMPLATE);
+
+            Matcher matcher = PATTERN.matcher(output.getStdout());
+            while (matcher.find()) {
+                String id = matcher.group(1);
+                String user = matcher.group(2);
+                Date date = new Date(Long.valueOf(matcher.group(3)) * 1000);
+                String message = matcher.group(4);
+
+                this.gitWatchService.add(new Commit(id, user, date, message));
+            }
+        } catch (ExecutionException e) {
+            Messages.showErrorDialog("访问Git服务器出现错误:"+e.getLocalizedMessage(),"错误信息");
         }
-
-        ProcessOutput output = NetAccesser.exec(workingDirectory.getPath(),"log", "..@{u}", "--date=raw", "--pretty=format:" + TEMPLATE);
-        if (output == null) {
-            return;
-        }
-
-        Matcher matcher = PATTERN.matcher(output.getStdout());
-        while (matcher.find()) {
-            String id = matcher.group(1);
-            String user = matcher.group(2);
-            Date date = new Date(Long.valueOf(matcher.group(3)) * 1000);
-            String message = matcher.group(4);
-
-            addCommit(new Commit(id, user, date, message));
-        }
-    }
-
-    private void addCommit(@NotNull Commit commit) {
-        this.gitWatchService.add(commit);
     }
 
 }
