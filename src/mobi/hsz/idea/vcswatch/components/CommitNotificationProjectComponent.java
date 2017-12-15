@@ -220,7 +220,7 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
 
                         @Override
                         public void run() {
-                            VcsLogUiImpl logUi = log.getLogUi();
+                            VcsLogUiImpl logUi = log.getMainLogUi();
                             if (logUi != null) {
                                 logUi.getVcsLog().jumpToReference(hash);
                             } else {

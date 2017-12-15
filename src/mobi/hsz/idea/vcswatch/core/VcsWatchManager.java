@@ -28,7 +28,7 @@ public class VcsWatchManager {
     /**
      * TODO: don't use static delay
      */
-    private static final long DELAY = 600;
+    public static long DELAY = 600;
 
     /**
      * Project VCS manager.
