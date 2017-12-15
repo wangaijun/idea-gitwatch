@@ -137,8 +137,8 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
 
     private static class CommitNotification extends Notification {
 
-        private static final String TITLE = CommonBundle.message(ResourceBundle.getBundle("messages.VcsWatchBundle"), "notification.title");
-        private static final String TITLE_PLURAL = CommonBundle.message(ResourceBundle.getBundle("messages.VcsWatchBundle"), "notification.title.plural");
+        private static final String TITLE = "New commit:";
+        private static final String TITLE_PLURAL = "New commits:";
 
         private final List<Commit> commits;
 
@@ -160,6 +160,7 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
             List<String> messages = ContainerUtil.newArrayList();
             for (Commit commit : commits) {
                 String time = new PrettyTime(Locale.ENGLISH).format(commit.getDate());
+
                 messages.add(CommonBundle.message(ResourceBundle.getBundle("messages.VcsWatchBundle"), "notification.content", commit.getMessage(), commit.getId(), time, commit.getUser()));
             }
 
