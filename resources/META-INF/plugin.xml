@@ -50,7 +50,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <projectService
-                serviceImplementation="mobi.hsz.idea.vcswatch.core.VcsWatchManager"/>
+                serviceImplementation="mobi.hsz.idea.vcswatch.model.GitWatchService"/>
     </extensions>
 
     <application-components>

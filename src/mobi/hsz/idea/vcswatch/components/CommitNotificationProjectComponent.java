@@ -25,7 +25,7 @@ import com.intellij.vcs.log.impl.VcsLogContentProvider;
 import com.intellij.vcs.log.impl.VcsLogManager;
 import com.intellij.vcs.log.ui.VcsLogUiImpl;
 import mobi.hsz.idea.vcswatch.model.Commit;
-import mobi.hsz.idea.vcswatch.core.VcsWatchManager;
+import mobi.hsz.idea.vcswatch.model.GitWatchService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.ocpsoft.prettytime.PrettyTime;
@@ -59,7 +59,7 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
     /**
      * Project VCS watch manager.
      */
-    private final VcsWatchManager vcsWatchManager;
+    private final GitWatchService gitWatchService;
 
     /**
      * An {@link java.util.concurrent.ExecutorService} that can schedule commands.
@@ -94,7 +94,7 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
     /**
      * Listens for the new {@link Commit} items.
      */
-    private final VcsWatchManager.OnCommitListener onCommitListener = new VcsWatchManager.OnCommitListener() {
+    private final GitWatchService.OnCommitListener onCommitListener = new GitWatchService.OnCommitListener() {
         @Override
         public void onCommit(@NotNull Commit commit) {
             if (scheduledFeature != null) {
@@ -107,18 +107,18 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
 
     public CommitNotificationProjectComponent(@NotNull Project project) {
         this.project = project;
-        this.vcsWatchManager = VcsWatchManager.getInstance(project);
+        this.gitWatchService = GitWatchService.getInstance(project);
         this.scheduler = JobScheduler.getScheduler();
     }
 
     @Override
     public void projectOpened() {
-        this.vcsWatchManager.setOnCommitListener(onCommitListener);
+        this.gitWatchService.setOnCommitListener(onCommitListener);
     }
 
     @Override
     public void projectClosed() {
-        this.vcsWatchManager.removeOnCommitListener(onCommitListener);
+        this.gitWatchService.removeOnCommitListener(onCommitListener);
     }
 
     @Override

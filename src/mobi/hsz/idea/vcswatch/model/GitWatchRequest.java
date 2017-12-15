@@ -7,7 +7,6 @@ import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import git4idea.config.GitVcsApplicationSettings;
-import mobi.hsz.idea.vcswatch.core.VcsWatchManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +21,7 @@ public class GitWatchRequest implements Runnable {
     private final VirtualFile workingDirectory;
 
     /** Project VCS watch manager. */
-    private final VcsWatchManager vcsWatchManager;
+    private final GitWatchService gitWatchService;
 
     /**
      * Executes passed command with specified {@link #workingDirectory}.
@@ -46,12 +45,12 @@ public class GitWatchRequest implements Runnable {
     }
 
     /**
-     * Adds new {@link Commit} to the {@link VcsWatchManager} registry.
+     * Adds new {@link Commit} to the {@link GitWatchService} registry.
      *
      * @param commit to add
      */
     public void addCommit(@NotNull Commit commit) {
-        this.vcsWatchManager.add(commit);
+        this.gitWatchService.add(commit);
     }
 
 
@@ -61,7 +60,7 @@ public class GitWatchRequest implements Runnable {
 
     public GitWatchRequest(@NotNull AbstractVcs vcs, @NotNull VirtualFile workingDirectory) {
         this.workingDirectory = workingDirectory;
-        this.vcsWatchManager = VcsWatchManager.getInstance(vcs.getProject());
+        this.gitWatchService = GitWatchService.getInstance(vcs.getProject());
     }
 
     @NotNull

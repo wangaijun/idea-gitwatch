@@ -1,4 +1,4 @@
-package mobi.hsz.idea.vcswatch.core;
+package mobi.hsz.idea.vcswatch.model;
 
 import com.intellij.concurrency.JobScheduler;
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
@@ -12,8 +12,6 @@ import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.VcsRoot;
 import com.intellij.util.containers.ContainerUtil;
 import git4idea.GitVcs;
-import mobi.hsz.idea.vcswatch.model.Commit;
-import mobi.hsz.idea.vcswatch.model.GitWatchRequest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @author Jakub Chrzanowski <jakub@hsz.mobi>
  * @since 0.1
  */
-public class VcsWatchManager {
+public class GitWatchService {
 
     /**
      * TODO: don't use static delay
@@ -63,13 +61,13 @@ public class VcsWatchManager {
     private final Map<String, Commit> commits = ContainerUtil.newHashMap();
 
 
-    private VcsWatchManager(@NotNull Project project) {
+    private GitWatchService(@NotNull Project project) {
         this.vcsManager = ProjectLevelVcsManager.getInstance(project);
         this.scheduler = JobScheduler.getScheduler();
     }
 
-    public static VcsWatchManager getInstance(@NotNull Project project) {
-        return ServiceManager.getService(project, VcsWatchManager.class);
+    public static GitWatchService getInstance(@NotNull Project project) {
+        return ServiceManager.getService(project, GitWatchService.class);
     }
 
     @Nullable

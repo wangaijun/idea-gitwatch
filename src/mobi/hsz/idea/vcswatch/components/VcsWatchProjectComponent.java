@@ -5,7 +5,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.VcsListener;
 import com.intellij.util.messages.MessageBusConnection;
-import mobi.hsz.idea.vcswatch.core.VcsWatchManager;
+import mobi.hsz.idea.vcswatch.model.GitWatchService;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -20,7 +20,7 @@ public class VcsWatchProjectComponent implements ProjectComponent {
     private final Project project;
 
     /** Project VCS watch manager. */
-    private final VcsWatchManager vcsWatchManager;
+    private final GitWatchService gitWatchService;
 
     /** Project message bus. */
     private MessageBusConnection messageBus;
@@ -28,13 +28,13 @@ public class VcsWatchProjectComponent implements ProjectComponent {
     private final VcsListener vcsListener = new VcsListener() {
         @Override
         public void directoryMappingChanged() {
-            vcsWatchManager.init();
+            gitWatchService.init();
         }
     };
 
     public VcsWatchProjectComponent(@NotNull Project project) {
         this.project = project;
-        this.vcsWatchManager = VcsWatchManager.getInstance(project);
+        this.gitWatchService = GitWatchService.getInstance(project);
     }
 
     @Override
