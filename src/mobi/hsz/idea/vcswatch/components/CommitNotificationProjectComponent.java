@@ -1,5 +1,6 @@
 package mobi.hsz.idea.vcswatch.components;
 
+import com.intellij.CommonBundle;
 import com.intellij.concurrency.JobScheduler;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationListener;
@@ -23,7 +24,6 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.vcs.log.impl.VcsLogContentProvider;
 import com.intellij.vcs.log.impl.VcsLogManager;
 import com.intellij.vcs.log.ui.VcsLogUiImpl;
-import mobi.hsz.idea.vcswatch.VcsWatchBundle;
 import mobi.hsz.idea.vcswatch.model.Commit;
 import mobi.hsz.idea.vcswatch.core.VcsWatchManager;
 import org.jetbrains.annotations.NotNull;
@@ -33,6 +33,7 @@ import org.ocpsoft.prettytime.PrettyTime;
 import javax.swing.event.HyperlinkEvent;
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -136,16 +137,16 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
 
     private static class CommitNotification extends Notification {
 
-        private static final String TITLE = VcsWatchBundle.message("notification.title");
-        private static final String TITLE_PLURAL = VcsWatchBundle.message("notification.title.plural");
+        private static final String TITLE = CommonBundle.message(ResourceBundle.getBundle("messages.VcsWatchBundle"), "notification.title");
+        private static final String TITLE_PLURAL = CommonBundle.message(ResourceBundle.getBundle("messages.VcsWatchBundle"), "notification.title.plural");
 
         private final List<Commit> commits;
 
         private CommitNotification(@NotNull final Project project, @NotNull final List<Commit> commits) {
             super(
-                    VcsWatchBundle.PLUGIN_NAME,
+                    "VCS Watch",
                     commits.size() == 1 ? TITLE : TITLE_PLURAL,
-                    VcsWatchBundle.PLUGIN_NAME,
+                    "VCS Watch",
                     NotificationType.INFORMATION,
                     createListener(project)
             );
@@ -159,10 +160,10 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
             List<String> messages = ContainerUtil.newArrayList();
             for (Commit commit : commits) {
                 String time = new PrettyTime(Locale.ENGLISH).format(commit.getDate());
-                messages.add(VcsWatchBundle.message("notification.content", commit.getMessage(), commit.getId(), time, commit.getUser()));
+                messages.add(CommonBundle.message(ResourceBundle.getBundle("messages.VcsWatchBundle"), "notification.content", commit.getMessage(), commit.getId(), time, commit.getUser()));
             }
 
-            return VcsWatchBundle.message("notification.update", StringUtil.join(messages, "<br/>"));
+            return CommonBundle.message(ResourceBundle.getBundle("messages.VcsWatchBundle"), "notification.update", StringUtil.join(messages, "<br/>"));
         }
 
         private static NotificationListener.Adapter createListener(@NotNull final Project project) {
