@@ -8,6 +8,7 @@ import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.VcsRoot;
 import com.intellij.util.containers.ContainerUtil;
 import git4idea.GitVcs;
+import mobi.hsz.idea.vcswatch.model.Commit;
 import mobi.hsz.idea.vcswatch.model.GitWatchRequest;
 import mobi.hsz.idea.vcswatch.util.Utils;
 import org.jetbrains.annotations.NotNull;

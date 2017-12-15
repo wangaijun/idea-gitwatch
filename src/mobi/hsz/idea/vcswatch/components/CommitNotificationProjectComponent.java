@@ -24,7 +24,7 @@ import com.intellij.vcs.log.impl.VcsLogContentProvider;
 import com.intellij.vcs.log.impl.VcsLogManager;
 import com.intellij.vcs.log.ui.VcsLogUiImpl;
 import mobi.hsz.idea.vcswatch.VcsWatchBundle;
-import mobi.hsz.idea.vcswatch.core.Commit;
+import mobi.hsz.idea.vcswatch.model.Commit;
 import mobi.hsz.idea.vcswatch.core.VcsWatchManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

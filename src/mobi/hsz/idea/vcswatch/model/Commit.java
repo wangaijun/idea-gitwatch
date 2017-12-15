@@ -1,4 +1,4 @@
-package mobi.hsz.idea.vcswatch.core;
+package mobi.hsz.idea.vcswatch.model;
 
 import org.jetbrains.annotations.NotNull;
 

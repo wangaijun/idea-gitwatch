@@ -7,9 +7,7 @@ import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import git4idea.config.GitVcsApplicationSettings;
-import mobi.hsz.idea.vcswatch.core.Commit;
 import mobi.hsz.idea.vcswatch.core.VcsWatchManager;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
