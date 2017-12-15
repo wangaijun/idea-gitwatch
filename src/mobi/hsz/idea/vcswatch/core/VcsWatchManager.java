@@ -6,7 +6,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.VcsRoot;
 import com.intellij.util.containers.ContainerUtil;
-import mobi.hsz.idea.vcswatch.requests.VcsWatchRequest;
+import mobi.hsz.idea.vcswatch.requests.GitWatchRequest;
 import mobi.hsz.idea.vcswatch.requests.VcsWatchRequestFactory;
 import org.jetbrains.annotations.NotNull;
 
@@ -73,7 +73,7 @@ public class VcsWatchManager {
 
         VcsRoot[] roots = vcsManager.getAllVcsRoots();
         for (VcsRoot root : roots) {
-            VcsWatchRequest request = VcsWatchRequestFactory.create(root);
+            GitWatchRequest request = VcsWatchRequestFactory.create(root);
             if (request != null) {
 //                scheduledFutureList.add(scheduler.schedule(request, DELAY, TimeUnit.SECONDS));
                 scheduledFutureList.add(scheduler.scheduleWithFixedDelay(request, 0, DELAY, TimeUnit.SECONDS));

@@ -7,8 +7,6 @@ import git4idea.GitVcs;
 import mobi.hsz.idea.vcswatch.util.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.idea.svn.SvnVcs;
-import org.zmlx.hg4idea.HgVcs;
 
 /**
  * @author Jakub Chrzanowski <jakub@hsz.mobi>
@@ -20,7 +18,7 @@ public class VcsWatchRequestFactory {
     }
 
     @Nullable
-    public static VcsWatchRequest create(@NotNull VcsRoot root) {
+    public static GitWatchRequest create(@NotNull VcsRoot root) {
         AbstractVcs vcs = root.getVcs();
         if (vcs == null || root.getPath() == null) {
             return null;
@@ -28,15 +26,8 @@ public class VcsWatchRequestFactory {
 
         if (Utils.isPluginEnabled("Git4Idea") && vcs instanceof GitVcs) {
             return new GitWatchRequest(vcs, root.getPath());
-        } else if (Utils.isPluginEnabled("hg4idea") && vcs instanceof HgVcs) {
-            return new HgWatchRequest(vcs, root.getPath());
-        } else if (Utils.isPluginEnabled("Subversion") && vcs instanceof SvnVcs) {
-            return new SvnWatchRequest(vcs, root.getPath());
         }
 
         return null;
     }
-
-
-
 }
