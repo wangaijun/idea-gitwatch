@@ -1,6 +1,5 @@
 package mobi.hsz.idea.vcswatch.components;
 
-import com.intellij.CommonBundle;
 import com.intellij.concurrency.JobScheduler;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationListener;
@@ -33,52 +32,18 @@ import org.ocpsoft.prettytime.PrettyTime;
 import javax.swing.event.HyperlinkEvent;
 import java.util.List;
 import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-/**
- * {@link ProjectComponent} that notifies about the new commits.
- *
- * @author Jakub Chrzanowski <jakub@hsz.mobi>
- * @since 0.1
- */
 public class CommitNotificationProjectComponent implements ProjectComponent {
-
-    /**
-     * Delay required to wait for another commits.
-     */
     private static final long DELAY = 1500;
-
-    /**
-     * Current project.
-     */
     private final Project project;
-
-    /**
-     * Project VCS watch manager.
-     */
     private final GitWatchService gitWatchService;
-
-    /**
-     * An {@link java.util.concurrent.ExecutorService} that can schedule commands.
-     */
     private final ScheduledExecutorService scheduler;
-
-    /**
-     * Commits to notify about.
-     */
     private final List<Commit> commits = ContainerUtil.newArrayList();
-
-    /**
-     * Scheduled feature with notification event.
-     */
     private ScheduledFuture<?> scheduledFeature;
 
-    /**
-     * Action that shows new {@link Notification} with {@link Commit} messages.
-     */
     private final Runnable notify = new Runnable() {
         @Override
         public void run() {
@@ -91,9 +56,6 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
         }
     };
 
-    /**
-     * Listens for the new {@link Commit} items.
-     */
     private final GitWatchService.OnCommitListener onCommitListener = new GitWatchService.OnCommitListener() {
         @Override
         public void onCommit(@NotNull Commit commit) {

@@ -8,21 +8,9 @@ import com.intellij.util.messages.MessageBusConnection;
 import mobi.hsz.idea.vcswatch.model.GitWatchService;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * {@link ProjectComponent} implementation that watches for the VCS roots changes in the project.
- *
- * @author Jakub Chrzanowski <jakub@hsz.mobi>
- * @since 0.1
- */
 public class GitWatchProjectComponent implements ProjectComponent {
-
-    /** Current project. */
     private final Project project;
-
-    /** Project VCS watch manager. */
     private final GitWatchService gitWatchService;
-
-    /** Project message bus. */
     private MessageBusConnection messageBus;
 
     private final VcsListener vcsListener = new VcsListener() {
