@@ -97,7 +97,6 @@ public class VcsWatchManager {
         for (VcsRoot root : roots) {
             GitWatchRequest request = create(root);
             if (request != null) {
-//                scheduledFutureList.add(scheduler.schedule(request, DELAY, TimeUnit.SECONDS));
                 scheduledFutureList.add(scheduler.scheduleWithFixedDelay(request, 0, DELAY, TimeUnit.SECONDS));
             }
         }
