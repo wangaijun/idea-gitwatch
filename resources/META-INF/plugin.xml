@@ -59,7 +59,7 @@
 
     <project-components>
         <component>
-            <implementation-class>mobi.hsz.idea.vcswatch.components.VcsWatchProjectComponent</implementation-class>
+            <implementation-class>mobi.hsz.idea.vcswatch.components.GitWatchProjectComponent</implementation-class>
         </component>
         <component>
             <implementation-class>mobi.hsz.idea.vcswatch.components.CommitNotificationProjectComponent

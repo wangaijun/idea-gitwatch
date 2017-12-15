@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Jakub Chrzanowski <jakub@hsz.mobi>
  * @since 0.1
  */
-public class VcsWatchProjectComponent implements ProjectComponent {
+public class GitWatchProjectComponent implements ProjectComponent {
 
     /** Current project. */
     private final Project project;
@@ -32,7 +32,7 @@ public class VcsWatchProjectComponent implements ProjectComponent {
         }
     };
 
-    public VcsWatchProjectComponent(@NotNull Project project) {
+    public GitWatchProjectComponent(@NotNull Project project) {
         this.project = project;
         this.gitWatchService = GitWatchService.getInstance(project);
     }
