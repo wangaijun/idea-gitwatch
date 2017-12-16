@@ -13,7 +13,10 @@ import java.util.List;
 public class NetAccesser {
     @Nullable
     public static ProcessOutput exec(String path, @NotNull String... command) throws ExecutionException {
-        final List<String> commands = ContainerUtil.newArrayList(GitVcsApplicationSettings.getInstance().getPathToGit());
+//        GitVcsApplicationSettings settings = GitVcsApplicationSettings.getInstance();
+//        String pathToGit = settings.getPathToGit();
+        String pathToGit = "C:\\Program Files\\Git\\cmd\\git.exe";
+        final List<String> commands = ContainerUtil.newArrayList(pathToGit);
         ContainerUtil.addAll(commands, command);
         final ProcessOutput output = ExecUtil.execAndGetOutput(commands, path);
         return output;

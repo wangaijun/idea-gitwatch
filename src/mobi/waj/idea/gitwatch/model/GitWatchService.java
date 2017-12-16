@@ -41,11 +41,15 @@ public class GitWatchService {
         VcsRoot[] roots = vcsManager.getAllVcsRoots();
         for (VcsRoot root : roots) {
             AbstractVcs vcs = root.getVcs();
-            if (!(vcs instanceof GitVcs)) continue;
+//            if (!(vcs instanceof GitVcs)) continue;
             GetCommitInfoOper request = new GetCommitInfoOper(vcs, root.getPath());
             if (request != null) {
+                new Thread(request).start();
                 scheduledFutureList.add(scheduler.scheduleWithFixedDelay(request, 0, DELAY, TimeUnit.SECONDS));
             }
+        }
+        if (scheduledFutureList.size()!=1){
+            throw new RuntimeException("scheduledFutureList.size():"+scheduledFutureList.size());
         }
     }
 
