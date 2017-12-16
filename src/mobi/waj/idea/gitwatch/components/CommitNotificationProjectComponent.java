@@ -127,7 +127,7 @@ public class CommitNotificationProjectComponent implements ProjectComponent {
                         "  <small><a href=\"HASH:%s\">{1}</a> - <i>%s</i> by <b>%s</b></small>";
                 messages.add(String.format(template,commit.getMessage(), commit.getId(), commit.getId(), time, commit.getUser()));
             }
-            String str = "<a href=\"UPDATE\">Update Project</a><br/>{0}";
+            String str = "<a href=\"UPDATE\">Update Project</a><br/>";
             return str + StringUtil.join(messages, "<br/>");
         }
 
