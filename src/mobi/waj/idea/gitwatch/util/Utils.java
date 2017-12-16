@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class Utils {
 
-    private static String storeIntervalFileName = "interval";
-    private static final String storePathFileName = "path";
+    private static String storeIntervalFileName = "D:\\git_watch\\" + "interval.txt";
+    private static final String storePathFileName = "D:\\git_watch\\" + "path.txt";
 
     public static void saveInterval(String intervalStr) throws IOException {
         save(intervalStr, storeIntervalFileName);
