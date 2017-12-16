@@ -47,7 +47,7 @@ public class GitWatchService {
     public static void setIntervalSecond(long DELAY) {
         if (DELAY<=0)return;
         try {
-            Utils.save(DELAY+"");
+            Utils.saveInterval(DELAY+"");
         } catch (IOException e) {
             //do not do anything
         }
@@ -91,6 +91,23 @@ public class GitWatchService {
 
     public void removeOnCommitListener(@NotNull OnCommitListener listener) {
         this.onCommitListeners.remove(listener);
+    }
+
+    public static void setGitPath(String path) {
+        if (path==null || path.trim().equals("")) return;
+        try {
+            Utils.savePath(path);
+        } catch (IOException e) {
+            //do not any thing
+        }
+    }
+
+    public static String getGitPath(){
+        try {
+            return Utils.readPath();
+        } catch (IOException e) {
+            return "";
+        }
     }
 
     public interface OnCommitListener {
