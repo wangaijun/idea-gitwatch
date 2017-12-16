@@ -7,9 +7,10 @@ import com.intellij.openapi.vcs.AbstractVcs;
 import com.intellij.openapi.vcs.ProjectLevelVcsManager;
 import com.intellij.openapi.vcs.VcsRoot;
 import com.intellij.util.containers.ContainerUtil;
-import git4idea.GitVcs;
+import mobi.waj.idea.gitwatch.util.Utils;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledExecutorService;
@@ -18,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 /**单例*/
 public class GitWatchService {
-    public static long DELAY = 60;
     private final ProjectLevelVcsManager vcsManager;
     private final ScheduledExecutorService scheduler;
     private final List<ScheduledFuture<?>> scheduledFutureList = ContainerUtil.newArrayList();
@@ -35,6 +35,25 @@ public class GitWatchService {
         return ServiceManager.getService(project, GitWatchService.class);
     }
 
+    private static long getIntervalSecond() {
+        try {
+            String interval = Utils.readInterval();
+            return Integer.parseInt(interval);
+        } catch (IOException e) {
+            return 60;
+        }
+    }
+
+    public static void setIntervalSecond(long DELAY) {
+        if (DELAY<=0)return;
+        try {
+            Utils.save(DELAY+"");
+        } catch (IOException e) {
+            //do not do anything
+        }
+
+    }
+
     public void start() {
         stop();
 
@@ -45,11 +64,8 @@ public class GitWatchService {
             GetCommitInfoOper request = new GetCommitInfoOper(vcs, root.getPath());
             if (request != null) {
                 new Thread(request).start();
-                scheduledFutureList.add(scheduler.scheduleWithFixedDelay(request, 0, DELAY, TimeUnit.SECONDS));
+                scheduledFutureList.add(scheduler.scheduleWithFixedDelay(request, 0, getIntervalSecond(), TimeUnit.SECONDS));
             }
-        }
-        if (scheduledFutureList.size()!=1){
-            throw new RuntimeException("scheduledFutureList.size():"+scheduledFutureList.size());
         }
     }
 

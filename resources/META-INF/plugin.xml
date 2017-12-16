@@ -55,5 +55,15 @@
     </project-components>
 
     <actions>
+        <action id="GitWatch.SetIntervalTime" class="mobi.waj.idea.gitwatch.action.SetIntervalTime" text="Set Interval Time"
+                description="set interval time">
+            <add-to-group group-id="VcsGroups" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt I"/>
+        </action>
+        <action id="GitWatch.SetGitExePath" class="mobi.waj.idea.gitwatch.action.SetGitExePath" text="Set git exe path"
+                description="Set git exe path to your path">
+            <add-to-group group-id="VcsGroups" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt P"/>
+        </action>
     </actions>
 </idea-plugin>
