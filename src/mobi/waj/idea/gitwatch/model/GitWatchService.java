@@ -40,7 +40,7 @@ public class GitWatchService {
             String interval = Utils.readInterval();
             return Integer.parseInt(interval);
         } catch (IOException e) {
-            return 60;
+            return 10;
         }
     }
 

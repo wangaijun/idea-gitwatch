@@ -9,7 +9,7 @@ public class SetIntervalTime extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        String intervalStr = Messages.showInputDialog("Interval time(second):", "Please input(default 60)",Messages.getQuestionIcon());
+        String intervalStr = Messages.showInputDialog("Interval time(second):", "Please input(default 10)",Messages.getQuestionIcon());
         try {
             int interval = Integer.parseInt(intervalStr);
             GitWatchService.setIntervalSecond(interval);
